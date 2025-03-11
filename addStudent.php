@@ -1,6 +1,6 @@
 <?php
   include('functions.php');
-  include('reusable/con.php');
+  include('reusable/conn.php');
   secure();
   // Get schools for dropdown
   $schools = $connect->query("SELECT * FROM schools");
@@ -66,7 +66,7 @@
   </div>
   
   <?php 
-      include('reusable/con.php');
+      include('reusable/conn.php');
       $query = 'SELECT * FROM schools';
       $schools = mysqli_query($connect, $query);
   ?>

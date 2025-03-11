@@ -36,7 +36,7 @@
   </div>
   
   <?php 
-      include('reusable/con.php');
+      include('reusable/conn.php');
       include('functions.php');
       if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
         $id = $_GET['id'];

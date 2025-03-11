@@ -1,5 +1,5 @@
 <?php
-  require('reusable/con.php');
+  require('reusable/conn.php');
   include('functions.php');
 
   if(isset($_GET['deleteSchool'])){

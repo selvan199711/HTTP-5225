@@ -25,7 +25,7 @@
   </div>
 
   <?php 
-      require('reusable/con.php');
+      require('reusable/conn.php');
       $query = "SELECT students.*, schools.`School Name` FROM students 
                     LEFT JOIN schools ON students.school_id = schools.id";
       $students = mysqli_query($connect, $query);
