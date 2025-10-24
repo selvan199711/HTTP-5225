@@ -41,36 +41,51 @@
         </div>
       </div>
       <div class="row">
-        <?php
-          foreach($schools as $school){
-            echo '<div class="col-md-4 mt-2 mb-2">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">' . $school['School Name'] . '</h5>
-                        <p class="card-text">' . $school['School Level'] . '</p>
-                        <span class="badge bg-secondary">' . $school['Phone'] . '</span>
-                        <span class="badge bg-info">' . $school['Email'] . '</span>
-                      </div>
-                      <div class="card-footer">
-                        <div class="row">
-                          <div class="col">
-                            <form action="updateSchool.php">
-                              <input type="hidden" name="id" value="' . $school['id'] . '">
-                              <button type="submit" name="updateSchool" class="btn btn-sm btn-primary">Update</button>
-                            </form>
-                          </div>
-                          <div class="col text-end">
-                            <form action="deleteSchool.php" method="GET">
-                                <input type="hidden" name="id" value="' . $school['id'] . '">
-                                <button type="submit" name="deleteSchool" class="btn btn-sm btn-danger">Delete</button>
-                              </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>';  
-          }
-        ?>
+  <?php
+    foreach($schools as $school){
+      echo '<div class="col-md-4 mt-2 mb-2">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">' . $school['School Name'] . '</h5>
+                <p class="card-text">' . $school['School Level'] . '</p>
+                <span class="badge bg-secondary">' . $school['Phone'] . '</span>
+                <span class="badge bg-info">' . $school['Email'] . '</span>
+                <hr>
+                <small><strong>Board Name:</strong> ' . $school['Board Name'] . '</small><br>
+                <small><strong>School Number:</strong> ' . $school['School Number'] . '</small><br>
+                <small><strong>Language:</strong> ' . $school['School Language'] . '</small><br>
+                <small><strong>Type:</strong> ' . $school['School Type'] . '</small><br>
+                <small><strong>Special Conditions:</strong> ' . $school['School Special Conditions'] . '</small><br>
+                <small><strong>Street:</strong> ' . $school['Street'] . '</small><br>
+                <small><strong>City:</strong> ' . $school['City'] . '</small><br>
+                <small><strong>Province:</strong> ' . $school['Province'] . '</small><br>
+                <small><strong>Postal Code:</strong> ' . $school['Postal Code'] . '</small><br>
+                <small><strong>Fax:</strong> ' . $school['Fax'] . '</small><br>
+                <small><strong>Grade Range:</strong> ' . $school['Grade Range'] . '</small><br>
+                <small><strong>Date Open:</strong> ' . $school['Date Open'] . '</small><br>
+                <small><strong>Website:</strong> ' . $school['Website'] . '</small><br>
+                <small><strong>Board Website:</strong> ' . $school['Board Website'] . '</small>
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col">
+                    <form action="updateSchool.php">
+                      <input type="hidden" name="id" value="' . $school['id'] . '">
+                      <button type="submit" name="updateSchool" class="btn btn-sm btn-primary">Update</button>
+                    </form>
+                  </div>
+                  <div class="col text-end">
+                    <form action="deleteSchool.php" method="GET">
+                      <input type="hidden" name="id" value="' . $school['id'] . '">
+                      <button type="submit" name="deleteSchool" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>';  
+      }
+    ?>
       </div>
     </div>
   </div>

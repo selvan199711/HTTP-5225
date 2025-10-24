@@ -52,7 +52,21 @@
         $phone = $_POST['phone'];
         $email = $_POST['email'];
     
-        $query = "UPDATE schools SET `school Name`='$schoolName', `school Level`='$schoolLevel', `Phone`='$phone', `Email`='$email' WHERE id=$id";
+        $query = "UPDATE schools SET
+        `Board Name`=?, `School Number`=?, `School Name`=?, `School Level`=?,
+        `School Language`=?, `School Type`=?, `School Special Conditions`=?,
+        `Street`=?, `City`=?, `Province`=?, `Postal Code`=?, `Phone`=?, `Fax`=?,
+        `Grade Range`=?, `Date Open`=?, `Email`=?, `Website`=?, `Board Website`=?
+         WHERE id=?";
+
+         mysqli_stmt_bind_param($stmt, "ssssssssssssssssssi",
+         $boardName, $schoolNumber, $schoolName, $schoolLevel,
+         $schoolLanguage, $schoolType, $schoolConditions,
+         $street, $city, $province, $postal, $phone, $fax,
+         $gradeRange, $dateOpen, $email, $website, $boardWebsite, $id
+          );
+
+
         $result = mysqli_query($connect, $query);
 
         if($result){

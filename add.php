@@ -12,16 +12,19 @@
     // Connection string
     include('reusable/conn.php');
     $query = "INSERT INTO schools (
-                `School Name`, 
-                `School Level`, 
-                `Phone`, 
-                `Email`) 
-              VALUES (
-              '" . mysqli_real_escape_string($connect, $schoolName) . "',
-              '" . mysqli_real_escape_string($connect, $schoolLevel) . "',
-              '" . mysqli_real_escape_string($connect, $phone) . "',
-              '" . mysqli_real_escape_string($connect, $email) . "')";
+    `Board Name`, `School Number`, `School Name`, `School Level`, 
+    `School Language`, `School Type`, `School Special Conditions`, 
+    `Street`, `City`, `Province`, `Postal Code`, `Phone`, `Fax`, 
+    `Grade Range`, `Date Open`, `Email`, `Website`, `Board Website`
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+$stmt = mysqli_prepare($connect, $query);
+mysqli_stmt_bind_param($stmt, "ssssssssssssssssss",
+  $boardName, $schoolNumber, $schoolName, $schoolLevel,
+  $schoolLanguage, $schoolType, $schoolConditions,
+  $street, $city, $province, $postal, $phone, $fax,
+  $gradeRange, $dateOpen, $email, $website, $boardWebsite
+);
     $school = mysqli_query($connect, $query);
 
     if($school){
@@ -80,32 +83,90 @@
   ?>
 
   <div class="container-fluid">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <form action="add.php" method="POST">
-            <div class="mb-3">
-              <label for="schoolName" class="form-label">School Name</label>
-              <input type="text" class="form-control" id="schoolName" name="schoolName" aria-describedby="school Name">
-            </div>
-            <div class="mb-3">
-              <label for="schoolType" class="form-label">School Level</label>
-              <input type="text" class="form-control" id="schoolLevel" name="schoolLevel">
-            </div>
-            <div class="mb-3">
-              <label for="phone" class="form-label">Phone</label>
-              <input type="text" class="form-control" id="phone" name="phone">
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" name="email">
-            </div>
-            <button type="submit" class="btn btn-primary" name="addSchool">Add School</button>
-          </form>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <form action="add.php" method="POST">
+          <div class="mb-3">
+            <label for="schoolName" class="form-label">School Name</label>
+            <input type="text" class="form-control" id="schoolName" name="schoolName" aria-describedby="school Name">
+          </div>
+          <div class="mb-3">
+            <label for="schoolLevel" class="form-label">School Level</label>
+            <input type="text" class="form-control" id="schoolLevel" name="schoolLevel">
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="phone" name="phone">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email">
+          </div>
+          <div class="mb-3">
+            <label for="boardName" class="form-label">Board Name</label>
+            <input type="text" class="form-control" id="boardName" name="boardName">
+          </div>
+          <div class="mb-3">
+            <label for="schoolNumber" class="form-label">School Number</label>
+            <input type="text" class="form-control" id="schoolNumber" name="schoolNumber">
+          </div>
+          <div class="mb-3">
+            <label for="schoolLanguage" class="form-label">School Language</label>
+            <input type="text" class="form-control" id="schoolLanguage" name="schoolLanguage">
+          </div>
+          <div class="mb-3">
+            <label for="schoolType" class="form-label">School Type</label>
+            <input type="text" class="form-control" id="schoolType" name="schoolType">
+          </div>
+          <div class="mb-3">
+            <label for="schoolConditions" class="form-label">School Special Conditions</label>
+            <input type="text" class="form-control" id="schoolConditions" name="schoolConditions">
+          </div>
+          <div class="mb-3">
+            <label for="street" class="form-label">Street</label>
+            <input type="text" class="form-control" id="street" name="street">
+          </div>
+          <div class="mb-3">
+            <label for="city" class="form-label">City</label>
+            <input type="text" class="form-control" id="city" name="city">
+          </div>
+          <div class="mb-3">
+            <label for="province" class="form-label">Province</label>
+            <input type="text" class="form-control" id="province" name="province">
+          </div>
+          <div class="mb-3">
+            <label for="postalCode" class="form-label">Postal Code</label>
+            <input type="text" class="form-control" id="postalCode" name="postalCode">
+          </div>
+          <div class="mb-3">
+            <label for="fax" class="form-label">Fax</label>
+            <input type="text" class="form-control" id="fax" name="fax">
+          </div>
+          <div class="mb-3">
+            <label for="gradeRange" class="form-label">Grade Range</label>
+            <input type="text" class="form-control" id="gradeRange" name="gradeRange">
+          </div>
+          <div class="mb-3">
+            <label for="dateOpen" class="form-label">Date Open</label>
+            <input type="text" class="form-control" id="dateOpen" name="dateOpen">
+          </div>
+          <div class="mb-3">
+            <label for="website" class="form-label">Website</label>
+            <input type="text" class="form-control" id="website" name="website">
+          </div>
+          <div class="mb-3">
+            <label for="boardWebsite" class="form-label">Board Website</label>
+            <input type="text" class="form-control" id="boardWebsite" name="boardWebsite">
+          </div>
+
+          <button type="submit" class="btn btn-primary" name="addSchool">Add School</button>
+        </form>
       </div>
     </div>
   </div>
+</div>
+
 
 
 </body>
