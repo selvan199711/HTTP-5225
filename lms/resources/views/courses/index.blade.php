@@ -14,8 +14,7 @@
         <div class="col-md-4 mb-3">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $course->title }}</h5>
-                    <p class="card-text mb-1"><strong>Code:</strong> {{ $course->code }}</p>
+                    <h5 class="card-title">{{ $course->name }}</h5>
                     <p class="card-text">{{ \Illuminate\Support\Str::limit($course->description, 80) }}</p>
                     <a href="{{ route('courses.show', $course->id) }}" class="card-link">View</a>
                     <a href="{{ route('courses.edit', $course->id) }}" class="card-link">Edit</a>

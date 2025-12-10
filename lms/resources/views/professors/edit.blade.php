@@ -3,12 +3,12 @@
 @section('content')
 <div class="row">
     <div class="col">
-        <h1 class="display-5">Edit Course</h1>
+        <h1 class="display-5">Edit Professor</h1>
     </div>
 </div>
 <div class="row mt-4">
-    <div class="col-md-8">
-        <form action="{{ route('courses.update', $course->id) }}" method="POST">
+    <div class="col-md-6">
+        <form action="{{ route('professors.update', $professor->id) }}" method="POST">
             @csrf
             @method('PUT')
             @if ($errors->any())
@@ -22,11 +22,7 @@
             @endif
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $course->name) }}">
-            </div>
-            <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="3">{{ old('description', $course->description) }}</textarea>
+                <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $professor->name) }}">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
