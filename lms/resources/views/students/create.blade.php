@@ -34,6 +34,25 @@
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
+            <div class="mb-3">
+                <label for="course_ids" class="form-label">Enroll in Courses</label>
+                <select class="form-select" id="course_ids" name="course_ids[]" multiple>
+                    @forelse ($courses as $course)
+                        <option value="{{ $course->id }}" @selected(collect(old('course_ids', []))->contains($course->id))>
+                            {{ $course->name }}
+                            @if($course->professor)
+                                (Prof. {{ $course->professor->fname }} {{ $course->professor->lname }})
+                            @endif
+                        </option>
+                    @empty
+                        <option disabled>No courses available</option>
+                    @endforelse
+                </select>
+                <div class="form-text">Hold Cmd/Ctrl to select multiple courses.</div>
+                @error('course_ids')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

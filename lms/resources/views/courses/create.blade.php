@@ -27,6 +27,18 @@
                 <label for="description" class="form-label">Description</label>
                 <textarea class="form-control" id="description" name="description" rows="3">{{ old('description') }}</textarea>
             </div>
+            <div class="mb-3">
+                <label class="form-label">Professor First Name</label>
+                <input type="text" class="form-control" name="professor_fname" value="{{ old('professor_fname') }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Professor Last Name</label>
+                <input type="text" class="form-control" name="professor_lname" value="{{ old('professor_lname') }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Professor Email</label>
+                <input type="email" class="form-control" name="professor_email" value="{{ old('professor_email') }}">
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

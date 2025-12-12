@@ -16,6 +16,10 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $course->name }}</h5>
                     <p class="card-text">{{ \Illuminate\Support\Str::limit($course->description, 80) }}</p>
+                    @if($course->professor)
+                        <p class="mb-1"><strong>Professor:</strong> {{ $course->professor->fname }} {{ $course->professor->lname }}</p>
+                    @endif
+                    <p class="text-muted small mb-2">Enrolled Students: {{ $course->students->count() }}</p>
                     <a href="{{ route('courses.show', $course->id) }}" class="card-link">View</a>
                     <a href="{{ route('courses.edit', $course->id) }}" class="card-link">Edit</a>
                     <form action="{{ route('courses.destroy', $course->id) }}" method="POST" class="d-inline">

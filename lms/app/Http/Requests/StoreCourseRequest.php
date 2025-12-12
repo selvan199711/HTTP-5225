@@ -24,6 +24,9 @@ class StoreCourseRequest extends FormRequest
         return [
             'name' => 'required|string',
             'description' => 'required|string',
+            'professor_fname' => 'required|string',
+            'professor_lname' => 'required|string',
+            'professor_email' => 'required|email|unique:professors,email',
         ];
     }
 }

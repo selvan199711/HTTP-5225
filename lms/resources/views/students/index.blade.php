@@ -16,6 +16,14 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $student->fname }} {{ $student->lname }}</h5>
                     <p class="card-text">{{ $student->email }}</p>
+                    @if($student->courses->isNotEmpty())
+                        <p class="fw-semibold mb-1">Courses:</p>
+                        <ul class="small">
+                            @foreach ($student->courses as $course)
+                                <li>{{ $course->name }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
                     <a href="{{ route('students.show', $student->id) }}" class="card-link">View</a>
                     <a href="{{ route('students.edit', $student->id) }}" class="card-link">Edit</a>
                     <a href="{{ route('students.trash', $student->id) }}" class="card-link text-danger">Delete</a>

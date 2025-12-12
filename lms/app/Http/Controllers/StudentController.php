@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Models\Course;
 use App\Models\Student;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
@@ -17,7 +18,7 @@ class StudentController extends Controller
     public function index(): View
     {
         return view('students.index', [
-            'students' => Student::all(),
+            'students' => Student::with('courses')->get(),
         ]);
     }
 
@@ -26,7 +27,9 @@ class StudentController extends Controller
      */
     public function create(): View
     {
-        return view('students.create');
+        return view('students.create', [
+            'courses' => Course::with('professor')->get(),
+        ]);
     }
 
     /**
@@ -34,7 +37,9 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request): RedirectResponse
     {
-        Student::create($request->validated());
+        $data = $request->safe()->only(['fname', 'lname', 'email']);
+        $student = Student::create($data);
+        $student->courses()->sync($request->input('course_ids', []));
 
         Session::flash('success', 'Student added successfully');
 
@@ -46,6 +51,8 @@ class StudentController extends Controller
      */
     public function show(Student $student): View
     {
+        $student->load('courses');
+
         return view('students.show', compact('student'));
     }
 
@@ -54,7 +61,12 @@ class StudentController extends Controller
      */
     public function edit(Student $student): View
     {
-        return view('students.edit', compact('student'));
+        $student->load('courses');
+
+        return view('students.edit', [
+            'student' => $student,
+            'courses' => Course::with('professor')->get(),
+        ]);
     }
 
     /**
@@ -62,7 +74,9 @@ class StudentController extends Controller
      */
     public function update(UpdateStudentRequest $request, Student $student): RedirectResponse
     {
-        $student->update($request->validated());
+        $data = $request->safe()->only(['fname', 'lname', 'email']);
+        $student->update($data);
+        $student->courses()->sync($request->input('course_ids', []));
 
         Session::flash('success', 'Student updated successfully');
 
@@ -75,7 +89,10 @@ class StudentController extends Controller
     public function destroy(int $id): RedirectResponse
     {
         $student = Student::withTrashed()->where('id', $id)->first();
-        $student?->forceDelete();
+        if ($student) {
+            $student->courses()->detach();
+            $student->forceDelete();
+        }
 
         Session::flash('success', 'Student deleted permanently');
 
@@ -94,7 +111,7 @@ class StudentController extends Controller
     public function trashed(): View
     {
         return view('students.index', [
-            'students' => Student::onlyTrashed()->get(),
+            'students' => Student::onlyTrashed()->with('courses')->get(),
         ]);
     }
 
